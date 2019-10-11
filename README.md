@@ -10,6 +10,8 @@ yamall-manage-service用户服务8071
 yamall-manage-web用户服务8081
 
 #前台
-yamall-manage-service用户服务8071
+#yamall-manage-service用户服务8071
 yamall-item-web用户服务8082
 
+yamall-search-service搜索服务8073
+yamall-search-web用户服务8083
