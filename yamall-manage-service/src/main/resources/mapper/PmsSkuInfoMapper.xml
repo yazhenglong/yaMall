@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infosys.ymall.manage.mapper.PmsSkuInfoMapper">
+
+    <resultMap id="skuSaleAttrValueslist" type="com.infosys.ymall.bean.PmsSkuInfo" autoMapping="true">
+        <result column="si_id" property="id"></result>
+        <collection property="skuSaleAttrValueList" ofType="com.infosys.ymall.bean.PmsSkuSaleAttrValue" autoMapping="true">
+            <result column="sav_id" property="id"></result>
+        </collection>
+    </resultMap>
+
+
+    <select id="selectSkuSaleAttrValueslist" resultMap="skuSaleAttrValueslist">
+        SELECT
+            si.id as si_id,sav.id as sav_id,si.*,sav.*
+        FROM
+            pms_sku_info AS si
+        RIGHT JOIN pms_sku_sale_attr_value AS sav ON si.id = sav.sku_id
+        WHERE
+            si.product_id = #{productId}
+    </select>
+
+</mapper>

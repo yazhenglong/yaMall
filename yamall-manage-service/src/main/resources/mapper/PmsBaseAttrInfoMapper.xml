@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infosys.ymall.manage.mapper.PmsBaseAttrInfoMapper">
+
+    <resultMap id="pmsBaseAttrInfoList" type="com.infosys.ymall.bean.PmsBaseAttrInfo" autoMapping="true">
+        <result column="ba_id" property="id"></result>
+        <collection property="attrValueList" ofType="com.infosys.ymall.bean.PmsBaseAttrValue" autoMapping="true">
+            <result column="bv_id" property="id"></result>
+        </collection>
+    </resultMap>
+
+
+    <select id="selectBaseAttrInfoByValueId" resultMap="pmsBaseAttrInfoList">
+        SELECT
+            ba.id as ba_id,ba.*,bv.id as bv_id,bv.*
+        FROM
+            pms_base_attr_info AS ba
+        INNER JOIN pms_base_attr_value AS bv ON ba.id = bv.attr_id
+        WHERE
+            bv.id IN (${valueIdStr});
+    </select>
+
+</mapper>
